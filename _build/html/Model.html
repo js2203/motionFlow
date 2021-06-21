@@ -224,7 +224,19 @@
 <li><p>N = zusätzliches Bildrauschen</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[Y(i, j) = \sum\limits_{i´, j´} K~(i, j)~ - \frac{1}{x}\]</div>
+\[Y(i, j) = \sum\limits_{i´, j´} K_{(i, j)} (i´, j´) X (i + i´, j +j´)\]</div>
+<ul class="simple">
+<li><p>K(i, j) repräsentiert den Kernel aus K, der auf den Pixel (i, j) zentriert ist</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y = H(K)x + n;\]</div>
+<ul class="simple">
+<li><p>vec() = vectorises a matrix</p></li>
+<li><p>y = vec(Y)</p></li>
+<li><p>x = vec(X)</p></li>
+<li><p>n = vec(n)</p></li>
+<li><p><span class="math notranslate nohighlight">\(H(K) ∈ \mathbb{R}^{PQ✖PQ}\)</span> (each row corresponds to a blur kernel located at each pixel)</p></li>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
