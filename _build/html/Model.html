@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>From Motion Blur to Motion Flow &#8212; From Motion Blur to Motion Flow</title>
+    <title>Estimating Motion Flow for Blur Removal &#8212; From Motion Blur to Motion Flow</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,8 +49,12 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deblurring Theorien" href="RelatedWork.html" />
+    <link rel="prev" title="Einführung" href="Introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -87,15 +91,15 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="markdown.html">
-   Markdown Files
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Estimating Motion Flow for Blur Removal
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks.html">
-   Content with notebooks
+  <a class="reference internal" href="RelatedWork.html">
+   Deblurring Theorien
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,7 +148,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/Model.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -164,7 +168,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/js2203/motionFlow/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/js2203/motionFlow/issues/new?title=Issue%20on%20page%20%2FModel.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -185,6 +189,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#heterogeneous-motion-blur-model">
+   Heterogeneous Motion Blur Model
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -193,10 +210,25 @@
         
               <div>
                 
-  <div class="section" id="from-motion-blur-to-motion-flow">
-<h1>From Motion Blur to Motion Flow<a class="headerlink" href="#from-motion-blur-to-motion-flow" title="Permalink to this headline">¶</a></h1>
-<p>Dieses Jupyter Book wurde im Rahmen der Vorlesung <em><strong>Object Recognition</strong></em> von Prof. Dr. Maucher erstellt und dient gleichzeitig als Präsentation des Themmas und als Prüfungsleistung.<br />
-Das in diesem Jupyter Book vorgestellte Thema ist <em>From Motion Blur to Motion Flow: a Deep Learning Solution for Removing Heterogeneous Motion Blur</em> von <span id="id1">Gong <em>et al.</em> [<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span>.</p>
+  <div class="section" id="estimating-motion-flow-for-blur-removal">
+<h1>Estimating Motion Flow for Blur Removal<a class="headerlink" href="#estimating-motion-flow-for-blur-removal" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="heterogeneous-motion-blur-model">
+<h2>Heterogeneous Motion Blur Model<a class="headerlink" href="#heterogeneous-motion-blur-model" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[Y = K ∗ X + N\]</div>
+<ul class="simple">
+<li><p>Y = unscharfes Bild</p></li>
+<li><p>K = heterogene motion blur kernel map mit verschiedenen motion blur kernel für jeden Pixel in X</p></li>
+<li><p>∗ = allgemeiner convolution operator</p></li>
+<li><p>X = latentes scharfes Bild</p></li>
+<li><p>N = zusätzliches Bildrauschen</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Y(i, j) = \sum\limits_{i´, j´} K~(i, j)~ - \frac{1}{x}\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -224,6 +256,8 @@ Das in diesem Jupyter Book vorgestellte Thema ist <em>From Motion Blur to Motion
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="Introduction.html" title="previous page">Einführung</a>
+    <a class='right-next' id="next-link" href="RelatedWork.html" title="next page">Deblurring Theorien</a>
 
         </div>
         

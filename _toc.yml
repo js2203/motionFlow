@@ -4,6 +4,6 @@
 format: jb-book
 root: Introduction
 chapters:
-- file: markdown
-- file: notebooks
+- file: RelatedWork
+- file: Model
 - file: Bibliographie

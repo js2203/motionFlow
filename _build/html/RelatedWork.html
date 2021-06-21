@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>From Motion Blur to Motion Flow &#8212; From Motion Blur to Motion Flow</title>
+    <title>Deblurring Theorien &#8212; From Motion Blur to Motion Flow</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliographie" href="Bibliographie.html" />
+    <link rel="prev" title="Estimating Motion Flow for Blur Removal" href="Model.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -87,15 +89,15 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown.html">
-   Markdown Files
+  <a class="reference internal" href="Model.html">
+   Estimating Motion Flow for Blur Removal
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks.html">
-   Content with notebooks
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Deblurring Theorien
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,7 +146,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/RelatedWork.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -164,7 +166,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/js2203/motionFlow/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/js2203/motionFlow/issues/new?title=Issue%20on%20page%20%2FRelatedWork.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -185,6 +187,29 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#konventionelles-blind-image-deblurring">
+   Konventionelles blind image deblurring
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spatially-varying-blur-removal">
+   Spatially-varying blur removal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-based-motion-blur-removing">
+   Learning based motion blur removing
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -193,10 +218,32 @@
         
               <div>
                 
-  <div class="section" id="from-motion-blur-to-motion-flow">
-<h1>From Motion Blur to Motion Flow<a class="headerlink" href="#from-motion-blur-to-motion-flow" title="Permalink to this headline">¶</a></h1>
-<p>Dieses Jupyter Book wurde im Rahmen der Vorlesung <em><strong>Object Recognition</strong></em> von Prof. Dr. Maucher erstellt und dient gleichzeitig als Präsentation des Themmas und als Prüfungsleistung.<br />
-Das in diesem Jupyter Book vorgestellte Thema ist <em>From Motion Blur to Motion Flow: a Deep Learning Solution for Removing Heterogeneous Motion Blur</em> von <span id="id1">Gong <em>et al.</em> [<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span>.</p>
+  <div class="section" id="deblurring-theorien">
+<h1>Deblurring Theorien<a class="headerlink" href="#deblurring-theorien" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="konventionelles-blind-image-deblurring">
+<h2>Konventionelles blind image deblurring<a class="headerlink" href="#konventionelles-blind-image-deblurring" title="Permalink to this headline">¶</a></h2>
+<p>Bei den konventionellen blind image deblurring Methoden ist eine der grunsätzlichen Annahmen, dass die Bewegungsunschärfe spatially uniform ist und nicht heterogenous.<br />
+In diesen Theorien wurden bereits mehrere Ansätze genauer betrachtet, um die Bewegungsunschärfe zu entfernen. Dazu gehören unter anderem:</p>
+<ul class="simple">
+<li><p>total variational regularizer</p></li>
+<li><p>Gaussian scale mixture priors</p></li>
+<li><p>L1/L2-norms, L0-norms</p></li>
+<li><p>dark channel based regularizers</p></li>
+</ul>
+<p>Zusätzlich wurden mehrere Estimator untersucht, um robustere und zuverlässige Kernel zu berechnen. Mögliche Estimator sind:</p>
+<ul class="simple">
+<li><p>edge-extraction-based maximum-a-posteriori (MAP)</p></li>
+<li><p>gradient activation based MAP</p></li>
+<li><p>variational Bayesian methods</p></li>
+</ul>
+<p>Die Theorien, welche sich dieser Methoden annehmen, sind dabei aber sehr stark abhängig von den ersten Annahmen und Priors. Der praktische Einsatz dieser Theorien wird hierduch eingeschränkt.</p>
+</div>
+<div class="section" id="spatially-varying-blur-removal">
+<h2>Spatially-varying blur removal<a class="headerlink" href="#spatially-varying-blur-removal" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="learning-based-motion-blur-removing">
+<h2>Learning based motion blur removing<a class="headerlink" href="#learning-based-motion-blur-removing" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -224,6 +271,8 @@ Das in diesem Jupyter Book vorgestellte Thema ist <em>From Motion Blur to Motion
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="Model.html" title="previous page">Estimating Motion Flow for Blur Removal</a>
+    <a class='right-next' id="next-link" href="Bibliographie.html" title="next page">Bibliographie</a>
 
         </div>
         
