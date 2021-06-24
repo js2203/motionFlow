@@ -32,17 +32,61 @@ $$y = H(K)x + n;$$
 
 ## Estimating Motion Flow for Blur Removal
 
+### Motion Flow Estimation
+
 
 Bei einem unscharfen Bild $Y$ ist das Ziel, den blur kernel $K$ zu bestimmen und ein unscharfes Bild $X$ durch eine non-blind deconvolution zu einem scharfen Bild wiederherzustellen.
 
 
-![Deblurring](./images/deblurring.jpg)  
-<p style='text-align: right;'>Quelle: {cite:p}`gong2017blur2mf`</p>
+![Deblurring](./images/deblurring1.jpg)  
+Quelle: {cite:p}`gong2017blur2mf`
 
 
 Basierend auf den bereits festgelegten Modellen, können blur kernel modelliert werden. Diese sind mit jedem Pixel und dessen Bewegung verbunden.  
-Dabei besitzt ein Pixel $P = (i, j)$ einen 2 dimensionalen Bewegungsvektor $M_p = (u_p, v_p)$.
+Dabei besitzt ein Pixel $P = (i, j)$ einen 2 dimensionalen Bewegungsvektor $M_p = (u_p, v_p)$. Dieser Bewegungsvektor beschreibt die Bewegung des Pixel über den zeitlichen Verlauf des Belichtungszeitraum einer Kamera.  
+
+
+![vectorDomain](./images/vectorDomain.PNG)
+Quelle: {cite:p}`gong2017blur2mf`
+
+
+Ist $u_p$ und $v_p$ dabei jeweils Teil einer eigenen Domäne, dann ist $M_p \in \mathbb{D}_u \times \mathbb{D}_v$
 
 
 ![Deblurring](./images/motionblurandflow.PNG)  
-<p style='text-align: right;'>Quelle: {cite:p}`gong2017blur2mf`</p>
+Quelle: {cite:p}`gong2017blur2mf`
+
+
+$|| vektor ||_2$ = 2. Norm eines Vektor
+
+
+![motionFlowFormula](./images/motionFlowFormula.PNG)  
+Quelle: {cite:p}`gong2017blur2mf`
+
+
+### Deconvolution
+
+
+![Deblurring](./images/deblurring2.jpg)  
+Quelle: {cite:p}`gong2017blur2mf`
+
+
+Das unscharfe Bild kann mithilfe des berechneten Motion Flow wieder zu einem scharfen Bild wiederhergestellt werden. Für die Wiederherstellung wird dabei das non-blind deconvolution Verfahren verwendet. Dafür wird ein Gaussian mixture model based regularizer $\Omega(x)$
+
+
+## Learning for Motion Flow Estimation
+
+Die Berechnung des Motion Flow ist die wichtigste Funktion für das Wiederherstellen eines unscharfen Bildes in dieser Arbeit. Dazu müssen die Bewegungsunschärfe pixelweise bestimmt werden. 
+Um das zu erreichen wird ein fully-convolutional deep neural network (FCN), welches den Motion Flow aus den unscharfen Bilder erstellt, benötigt.
+
+
+![blurLearning](./images/blurLearning.jpg)  
+Quelle: {cite:p}`gong2017blur2mf`
+
+
+Für das Training des FCN wird ein Set $\{(Y^t,M^t)\}^T_{t=1}$ von unscharfen Bilder mit bereits zugewiesen Motion Flows benötigt.  
+Das Ziel ist es nun, eine end-to-end mapping Funktion $M=f(Y)$ zu lernen, welche ein unscharfes Bild $Y$ dem dazugehörigen Motion Flow $M$ zuweist.  
+Das stellt ein großes Problem in der Praxis dar, da es unmöglich ist, die Motion Flows für unterschiedliche, unscharfe Bilder zu erhalten.  
+Für Menschen ist es nicht möglich, die Bilder richtig zu labeln.  
+
+Die Lösung für dieses Problem ist die synthetische Herstellung und Simulation von Motion Flows für verschiedene, scharfe Bilder.

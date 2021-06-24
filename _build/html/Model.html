@@ -53,7 +53,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bibliographie" href="Bibliographie.html" />
+    <link rel="next" title="Code" href="Code.html" />
     <link rel="prev" title="Deblurring Theorien" href="RelatedWork.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -100,6 +100,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Estimating Motion Flow for Blur Removal
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Code.html">
+   Code
   </a>
  </li>
  <li class="toctree-l1">
@@ -203,6 +208,23 @@
   <a class="reference internal nav-link" href="#id1">
    Estimating Motion Flow for Blur Removal
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motion-flow-estimation">
+     Motion Flow Estimation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deconvolution">
+     Deconvolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-for-motion-flow-estimation">
+   Learning for Motion Flow Estimation
+  </a>
  </li>
 </ul>
 
@@ -245,13 +267,40 @@
 </div>
 <div class="section" id="id1">
 <h2>Estimating Motion Flow for Blur Removal<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="motion-flow-estimation">
+<h3>Motion Flow Estimation<a class="headerlink" href="#motion-flow-estimation" title="Permalink to this headline">¶</a></h3>
 <p>Bei einem unscharfen Bild <span class="math notranslate nohighlight">\(Y\)</span> ist das Ziel, den blur kernel <span class="math notranslate nohighlight">\(K\)</span> zu bestimmen und ein unscharfes Bild <span class="math notranslate nohighlight">\(X\)</span> durch eine non-blind deconvolution zu einem scharfen Bild wiederherzustellen.</p>
-<p><img alt="Deblurring" src="_images/deblurring.jpg" /></p>
-<p style='text-align: right;'>Quelle: {cite:p}`gong2017blur2mf`</p>
+<p><img alt="Deblurring" src="_images/deblurring1.jpg" /><br />
+Quelle: <span id="id2">[<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span></p>
 <p>Basierend auf den bereits festgelegten Modellen, können blur kernel modelliert werden. Diese sind mit jedem Pixel und dessen Bewegung verbunden.<br />
-Dabei besitzt ein Pixel <span class="math notranslate nohighlight">\(P = (i, j)\)</span> einen 2 dimensionalen Bewegungsvektor <span class="math notranslate nohighlight">\(M_p = (u_p, v_p)\)</span>.</p>
-<p><img alt="Deblurring" src="_images/motionblurandflow.PNG" /></p>
-<p style='text-align: right;'>Quelle: {cite:p}`gong2017blur2mf`</p>
+Dabei besitzt ein Pixel <span class="math notranslate nohighlight">\(P = (i, j)\)</span> einen 2 dimensionalen Bewegungsvektor <span class="math notranslate nohighlight">\(M_p = (u_p, v_p)\)</span>. Dieser Bewegungsvektor beschreibt die Bewegung des Pixel über den zeitlichen Verlauf des Belichtungszeitraum einer Kamera.</p>
+<p><img alt="vectorDomain" src="_images/vectorDomain.PNG" />
+Quelle: <span id="id3">[<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span></p>
+<p>Ist <span class="math notranslate nohighlight">\(u_p\)</span> und <span class="math notranslate nohighlight">\(v_p\)</span> dabei jeweils Teil einer eigenen Domäne, dann ist <span class="math notranslate nohighlight">\(M_p \in \mathbb{D}_u \times \mathbb{D}_v\)</span></p>
+<p><img alt="Deblurring" src="_images/motionblurandflow.PNG" /><br />
+Quelle: <span id="id4">[<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span></p>
+<p><span class="math notranslate nohighlight">\(|| vektor ||_2\)</span> = 2. Norm eines Vektor</p>
+<p><img alt="motionFlowFormula" src="_images/motionFlowFormula.PNG" /><br />
+Quelle: <span id="id5">[<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span></p>
+</div>
+<div class="section" id="deconvolution">
+<h3>Deconvolution<a class="headerlink" href="#deconvolution" title="Permalink to this headline">¶</a></h3>
+<p><img alt="Deblurring" src="_images/deblurring2.jpg" /><br />
+Quelle: <span id="id6">[<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span></p>
+<p>Das unscharfe Bild kann mithilfe des berechneten Motion Flow wieder zu einem scharfen Bild wiederhergestellt werden. Für die Wiederherstellung wird dabei das non-blind deconvolution Verfahren verwendet. Dafür wird ein Gaussian mixture model based regularizer <span class="math notranslate nohighlight">\(\Omega(x)\)</span></p>
+</div>
+</div>
+<div class="section" id="learning-for-motion-flow-estimation">
+<h2>Learning for Motion Flow Estimation<a class="headerlink" href="#learning-for-motion-flow-estimation" title="Permalink to this headline">¶</a></h2>
+<p>Die Berechnung des Motion Flow ist die wichtigste Funktion für das Wiederherstellen eines unscharfen Bildes in dieser Arbeit. Dazu müssen die Bewegungsunschärfe pixelweise bestimmt werden.
+Um das zu erreichen wird ein fully-convolutional deep neural network (FCN), welches den Motion Flow aus den unscharfen Bilder erstellt, benötigt.</p>
+<p><img alt="blurLearning" src="_images/blurLearning.jpg" /><br />
+Quelle: <span id="id7">[<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span></p>
+<p>Für das Training des FCN wird ein Set <span class="math notranslate nohighlight">\(\{(Y^t,M^t)\}^T_{t=1}\)</span> von unscharfen Bilder mit bereits zugewiesen Motion Flows benötigt.<br />
+Das Ziel ist es nun, eine end-to-end mapping Funktion <span class="math notranslate nohighlight">\(M=f(Y)\)</span> zu lernen, welche ein unscharfes Bild <span class="math notranslate nohighlight">\(Y\)</span> dem dazugehörigen Motion Flow <span class="math notranslate nohighlight">\(M\)</span> zuweist.<br />
+Das stellt ein großes Problem in der Praxis dar, da es unmöglich ist, die Motion Flows für unterschiedliche, unscharfe Bilder zu erhalten.<br />
+Für Menschen ist es nicht möglich, die Bilder richtig zu labeln.</p>
+<p>Die Lösung für dieses Problem ist die synthetische Herstellung und Simulation von Motion Flows für verschiedene, scharfe Bilder.</p>
 </div>
 </div>
 
@@ -281,7 +330,7 @@ Dabei besitzt ein Pixel <span class="math notranslate nohighlight">\(P = (i, j)\
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="RelatedWork.html" title="previous page">Deblurring Theorien</a>
-    <a class='right-next' id="next-link" href="Bibliographie.html" title="next page">Bibliographie</a>
+    <a class='right-next' id="next-link" href="Code.html" title="next page">Code</a>
 
         </div>
         
