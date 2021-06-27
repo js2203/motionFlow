@@ -225,6 +225,13 @@
   <a class="reference internal nav-link" href="#learning-for-motion-flow-estimation">
    Learning for Motion Flow Estimation
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#domain">
+     Domain
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -301,6 +308,17 @@ Das Ziel ist es nun, eine end-to-end mapping Funktion <span class="math notransl
 Das stellt ein großes Problem in der Praxis dar, da es unmöglich ist, die Motion Flows für unterschiedliche, unscharfe Bilder zu erhalten.<br />
 Für Menschen ist es nicht möglich, die Bilder richtig zu labeln.</p>
 <p>Die Lösung für dieses Problem ist die synthetische Herstellung und Simulation von Motion Flows für verschiedene, scharfe Bilder.</p>
+<div class="section" id="domain">
+<h3>Domain<a class="headerlink" href="#domain" title="Permalink to this headline">¶</a></h3>
+<p>Um den Trainingsprozess zu vereinfachen, wird das FCN über eine diskrete output domain trainiert. Als Grundlage dafür dienen die Ergebnisse aus der optical flow estimation, welche der motion flow estimation sehr stark ähneln.</p>
+<p><img alt="opticalFlow" src="_images/opticalFlow.PNG" /><br />
+Quelle: <span id="id8">[<a class="reference internal" href="Bibliographie.html#id4">WGH15</a>]</span></p>
+<p>Für die Bewegeungsvektoren <span class="math notranslate nohighlight">\(U\)</span> und <span class="math notranslate nohighlight">\(V\)</span> werden dafür eine integer domain festgelegt und <span class="math notranslate nohighlight">\(M =f(Y)\)</span> als multi-class classification.<br />
+Dadurch erhält man die 2 Domänen<br />
+$<span class="math notranslate nohighlight">\(\mathbb{D}_u = \{u|u ∈ \mathbb{Z}, |u| \leq u_{max}\}\)</span><span class="math notranslate nohighlight">\(  
+\)</span><span class="math notranslate nohighlight">\(\mathbb{D}_v = \{v|v ∈ \mathbb{Z}, |u| \leq v_{max}\}\)</span><span class="math notranslate nohighlight">\(  
+wobei \)</span>\mathbb{Z}$ die integer domain ist.</p>
+</div>
 </div>
 </div>
 

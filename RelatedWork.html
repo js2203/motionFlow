@@ -245,9 +245,26 @@ In diesen Theorien wurden bereits mehrere Ansätze genauer betrachtet, um die Be
 </div>
 <div class="section" id="spatially-varying-blur-removal">
 <h2>Spatially-varying blur removal<a class="headerlink" href="#spatially-varying-blur-removal" title="Permalink to this headline">¶</a></h2>
+<p>Um mit räumlich variierender Unschärfe umzugehen, werden flexiblere blur Modelle vorgeschlagen.
+Ein Ansatz ist ein projektives projective motion path model, welches ein unscharfes Bild als gewichtete Summe einer Menge von
+transformierten scharfen Bildern darstellt.<br />
+Ein weiterer Ansatz ist, die Kamerabewegugn als motion density function für non-uniform blur zu modellieren.
+Um die Unschärfe, die durch die Bewegung von Objekten verursacht wird, zu behandeln, segmentieren einige Methoden Bilder in Bereiche mit unterschiedlichen Arten von Unschärfe und sind somit stark von einer akkuraten Segmentierung eines unscharfen Bildes abhängig.
+Ein pixelweises lineares Bewegungsmodell wurde ebenfalls eingeführt, um mit heterogener Bewegungsunschärfe umzugehen.
+Obwohl die Bewegung als lokal linear angenommen wird, gibt es keine Annahmen über die latente Bewegung,
+was es flexibel genug macht, um einen großen Bereich möglicher Bewegungen zu behandeln.</p>
 </div>
 <div class="section" id="learning-based-motion-blur-removing">
 <h2>Learning based motion blur removing<a class="headerlink" href="#learning-based-motion-blur-removing" title="Permalink to this headline">¶</a></h2>
+<p>more flexible and efficient blue removal<br />
+discriminative methods for non-blind deconvolution based on</p>
+<ul class="simple">
+<li><p>Gaussian CRF</p></li>
+<li><p>multi-layer perceptron (MLP)</p></li>
+<li><p>deep convolution neural network</p></li>
+</ul>
+<p>most relevant work is a method based on CNN and patch-level blur type classification<br />
+focuses on estimating the motion flow from single blurry image</p>
 </div>
 </div>
 
