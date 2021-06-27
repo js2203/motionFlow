@@ -90,3 +90,20 @@ Das stellt ein großes Problem in der Praxis dar, da es unmöglich ist, die Moti
 Für Menschen ist es nicht möglich, die Bilder richtig zu labeln.  
 
 Die Lösung für dieses Problem ist die synthetische Herstellung und Simulation von Motion Flows für verschiedene, scharfe Bilder.
+
+
+#### Domain
+
+Um den Trainingsprozess zu vereinfachen, wird das FCN über eine diskrete output domain trainiert. Als Grundlage dafür dienen die Ergebnisse aus der optical flow estimation, welche der motion flow estimation sehr stark ähneln.  
+
+
+
+![opticalFlow](./images/opticalFlow.PNG)  
+Quelle: {cite:p}`7410638`
+
+
+Für die Bewegeungsvektoren $U$ und $V$ werden dafür eine integer domain festgelegt und $M =f(Y)$ als multi-class classification.  
+Dadurch erhält man die 2 Domänen  
+$$\mathbb{D}_u = \{u|u ∈ \mathbb{Z}, |u| \leq u_{max}\}$$  
+$$\mathbb{D}_v = \{v|v ∈ \mathbb{Z}, |u| \leq v_{max}\}$$  
+wobei $\mathbb{Z}$ die integer domain ist.
