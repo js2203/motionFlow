@@ -57,9 +57,6 @@ Ist $u_p$ und $v_p$ dabei jeweils Teil einer eigenen Domäne, dann ist $M_p \in 
 Quelle: {cite:p}`gong2017blur2mf`
 
 
-$|| vektor ||_2$ = 2. Norm eines Vektor
-
-
 ![motionFlowFormula](./images/motionFlowFormula.PNG)  
 Quelle: {cite:p}`gong2017blur2mf`
 
@@ -107,3 +104,10 @@ Dadurch erhält man die 2 Domänen
 $$\mathbb{D}_u = \{u|u ∈ \mathbb{Z}, |u| \leq u_{max}\}$$  
 $$\mathbb{D}_v = \{v|v ∈ \mathbb{Z}, |u| \leq v_{max}\}$$  
 wobei $\mathbb{Z}$ die integer domain ist.
+
+
+![vectorDomain](./images/vectorDomain.PNG)
+Quelle: {cite:p}`gong2017blur2mf`
+
+
+Zwei beliebige Bewegungsvektoren mit gleicher Länge und entgegengesetzter Richtungen, z.b. $(u_p, v_p)$ und $(-u_p, -v_p)$, das gleiche Unschärfemuster erzeugen, was den Lernprozess verwirren kann. Deshalb wird die Bewegung in horizontaler Richtung auf nicht-negative Werte eingeschränkt.
