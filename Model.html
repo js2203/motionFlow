@@ -53,7 +53,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Code" href="Code.html" />
+    <link rel="next" title="&lt;no title&gt;" href="Motion_Flow.html" />
     <link rel="prev" title="Deblurring Theorien" href="RelatedWork.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -260,7 +260,7 @@
 <div class="math notranslate nohighlight">
 \[Y(i, j) = \sum\limits_{i´, j´} K_{(i, j)} (i´, j´) X (i + i´, j +j´)\]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(K_{(i, j)}\)</span> repräsentiert den Kernel aus K, der auf den Pixel (i, j) zentriert ist</p></li>
+<li><p><span class="math notranslate nohighlight">\(K_{(i, j)}\)</span> repräsentiert den Kernel aus K, der auf den Pixel <span class="math notranslate nohighlight">\((i, j)\)</span> zentriert ist, der auf einem Bereich des Bildes wirkt.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[y = H(K)x + n;\]</div>
@@ -315,10 +315,11 @@ Für Menschen ist es nicht möglich, die Bilder richtig zu labeln.</p>
 <p><img alt="opticalFlow" src="_images/opticalFlow.PNG" /><br />
 Quelle: <span id="id7">[<a class="reference internal" href="Bibliographie.html#id4">WGH15</a>]</span></p>
 <p>Für die Bewegeungsvektoren <span class="math notranslate nohighlight">\(U\)</span> und <span class="math notranslate nohighlight">\(V\)</span> werden dafür eine integer domain festgelegt und <span class="math notranslate nohighlight">\(M =f(Y)\)</span> als multi-class classification.<br />
-Dadurch erhält man die 2 Domänen<br />
-$<span class="math notranslate nohighlight">\(\mathbb{D}_u = \{u|u ∈ \mathbb{Z}, |u| \leq u_{max}\}\)</span><span class="math notranslate nohighlight">\(  
-\)</span><span class="math notranslate nohighlight">\(\mathbb{D}_v = \{v|v ∈ \mathbb{Z}, |u| \leq v_{max}\}\)</span><span class="math notranslate nohighlight">\(  
-wobei \)</span>\mathbb{Z}$ die integer domain ist.</p>
+Dadurch erhält man die 2 Domänen, wobei <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> die integer domain ist.</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{D}_u = \{u|u ∈ \mathbb{Z}, |u| \leq u_{max}\}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbb{D}_v = \{v|v ∈ \mathbb{Z}, |u| \leq v_{max}\}\]</div>
 <p><img alt="vectorDomain" src="_images/vectorDomain.PNG" />
 Quelle: <span id="id8">[<a class="reference internal" href="Bibliographie.html#id2">GYL+17</a>]</span></p>
 <p>Zwei beliebige Bewegungsvektoren mit gleicher Länge und entgegengesetzter Richtungen, z.b. <span class="math notranslate nohighlight">\((u_p, v_p)\)</span> und <span class="math notranslate nohighlight">\((-u_p, -v_p)\)</span>, das gleiche Unschärfemuster erzeugen, was den Lernprozess verwirren kann. Deshalb wird die Bewegung in horizontaler Richtung auf nicht-negative Werte eingeschränkt.</p>
@@ -352,7 +353,7 @@ Quelle: <span id="id8">[<a class="reference internal" href="Bibliographie.html#i
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="RelatedWork.html" title="previous page">Deblurring Theorien</a>
-    <a class='right-next' id="next-link" href="Code.html" title="next page">Code</a>
+    <a class='right-next' id="next-link" href="Motion_Flow.html" title="next page">&lt;no title&gt;</a>
 
         </div>
         
