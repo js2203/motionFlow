@@ -14,7 +14,7 @@
 
 # $$V(i,j)\in D_v, \forall i,j$$
 
-# **Abbildung 4**![FCN_MotionFlow.PNG](attachment:FCN_MotionFlow.PNG)
+# **Abbildung 4**![FCN_MotionFlow.PNG](./FCN_MotionFlow.jpeg)
 
 # Zur Bequemlichkeit, lassen wir  $D=|D_u^+| + |D_v|$ die Gesamtzahl der Labels bezeichnen
 # sowohl für $U$ als auch für $V$. Die Netzwerkstruktur ist wie in Abbildung 4 gezeigt, verwendet werden 7 Faltungs-(conv) Layer und 4 Max-Pooling (Pool) Layer sowie 3 uconv-Layer zum Upsampling der Prediction-Map. Uconv bezeichnet  die fraktionierte Faltung, auch bekannt als Deconvolution. Es wird ein kleiner Stride(Schritt) von 1 Pixel für alle Faltungsschichten verwendet. Die uconv-Layer werden mit bilinearer Interpolation initialisiert und werden zum Upsampling der Aktivierungsfunktionen verwendet.

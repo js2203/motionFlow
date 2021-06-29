@@ -234,7 +234,7 @@ Das Ziel dieses FCN-Netzwerks besteht darin, eine <strong>End-to-End-Mapping</st
 \[U(i,j)\in D_u^+\]</div>
 <div class="math notranslate nohighlight">
 \[V(i,j)\in D_v, \forall i,j\]</div>
-<p><strong>Abbildung 4</strong><img alt="FCN_MotionFlow.PNG" src="attachment:FCN_MotionFlow.PNG" /></p>
+<p><strong>Abbildung 4</strong><img alt="FCN_MotionFlow.PNG" src="_images/FCN_MotionFlow.jpeg" /></p>
 <p>Zur Bequemlichkeit, lassen wir  <span class="math notranslate nohighlight">\(D=|D_u^+| + |D_v|\)</span> die Gesamtzahl der Labels bezeichnen
 sowohl für <span class="math notranslate nohighlight">\(U\)</span> als auch für <span class="math notranslate nohighlight">\(V\)</span>. Die Netzwerkstruktur ist wie in Abbildung 4 gezeigt, verwendet werden 7 Faltungs-(conv) Layer und 4 Max-Pooling (Pool) Layer sowie 3 uconv-Layer zum Upsampling der Prediction-Map. Uconv bezeichnet  die fraktionierte Faltung, auch bekannt als Deconvolution. Es wird ein kleiner Stride(Schritt) von 1 Pixel für alle Faltungsschichten verwendet. Die uconv-Layer werden mit bilinearer Interpolation initialisiert und werden zum Upsampling der Aktivierungsfunktionen verwendet.</p>
 <div class="math notranslate nohighlight">
