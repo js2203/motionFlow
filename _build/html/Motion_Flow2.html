@@ -229,7 +229,7 @@
 <p><br><strong>Motion-Flow Schätzung und Netzwerk-Design</strong><br><br>
 Das Ziel dieses FCN-Netzwerks besteht darin, eine <strong>End-to-End-Mapping</strong> von einem unscharfen Bild auf dessen entsprechende Motion Flow Map zu erreichen. Gegeben sei ein beliebiges RGB-Bild mit der willkürlichen Größe <span class="math notranslate nohighlight">\(P\times Q\)</span>. Das FCN wird dazu verwendet eine Motion Flow-Map zu schätzen <span class="math notranslate nohighlight">\(M=(U,V)\)</span> mit der gleichen Größe wie das Eingabebild, wobei <span class="math notranslate nohighlight">\(U(i,j)\in D_u^+\)</span> and <span class="math notranslate nohighlight">\(V(i,j)\in D_v\)</span>, <span class="math notranslate nohighlight">\(\forall i,j\)</span>.</p>
 <p>RGB-Bild mit der willkürlichen Größe $<span class="math notranslate nohighlight">\(P\times Q\)</span>$</p>
-<p>$<span class="math notranslate nohighlight">\(M=(U,V)\)</span>$ mit der gleichen Größe wie das Eingabebild</p>
+<p><span class="math notranslate nohighlight">\(M=(U,V)\)</span> mit der gleichen Größe wie das Eingabebild</p>
 <div class="math notranslate nohighlight">
 \[U(i,j)\in D_u^+\]</div>
 <div class="math notranslate nohighlight">
@@ -269,15 +269,8 @@ der Pixel bei <span class="math notranslate nohighlight">\((i, j)\)</span> eine 
 Richtung gemacht hat und <span class="math notranslate nohighlight">\(F_{v,i,j}(Y)\)</span> repräsentiert die Wahrscheinlichkeit, dass der
 Pixel bei <span class="math notranslate nohighlight">\((i, j)\)</span> eine Bewegung <span class="math notranslate nohighlight">\(v\)</span> entlang der vertikalen Richtung gemacht hat.</p>
 <p>Es wird dann die <strong>Summe des Kreuzentropieverlustes von beiden Kanälen</strong> als die <strong>Finale Loss-Function</strong> verwendet.</p>
-<p>\begin{eqnarray}
-\begin{split}
-L(Y,M)! =! &amp;-!\sum_{i=1}^P\sum_{j=1}^Q ! \sum_{u\in D_u^+}! 1(U(i,j)=u) \log(F_{u,i,j}(Y)) \
-&amp; -!\sum_{i=1}^P\sum_{j=1}^Q !\sum_{v\in D_v} 1(V(i,j)=v) \log(F_{v,i,j}(Y)),
-\end{split}
-\label{eq:loss_fun}
-\nonumber
-\end{eqnarray}
-<span class="math notranslate nohighlight">\(1\)</span> ist eine Indikator Funktion
+<p><img alt="FCN_MotionFlow.PNG" src="_images/loss.PNG" /></p>
+<p><span class="math notranslate nohighlight">\(1\)</span> ist eine Indikator Funktion
 <br></p>
 <p><br><strong>Simulation von Motion-Flow-Maps zur Datengenerierung</strong></p>
 <p>Der Kern dieses Abschnitts besteht darin, einen Datensatz zu generieren, der realistische Unschärfemuster auf verschiedenen Bildern für das Training enthält.
@@ -333,9 +326,9 @@ kann <span class="math notranslate nohighlight">\(M_{T_x}=(U_{T_x}, V_{T_x})\)</
 auf ähnliche Weise erzeugt werden.</p>
 <div class="math notranslate nohighlight">
 \[p_{T_x}=(i_{T_x}, j_{T_x})\]</div>
-<p>Beschleunigungskoeffizienten $<span class="math notranslate nohighlight">\(r_{T_x}\)</span>$</p>
-<p>Bewegungswert $<span class="math notranslate nohighlight">\(t_{T_x}\)</span>$</p>
-<p>$<span class="math notranslate nohighlight">\(M_{T_x}=(U_{T_x}, V_{T_x})\)</span>$  wie folgt generiert werden</p>
+<p>Beschleunigungskoeffizienten <span class="math notranslate nohighlight">\(r_{T_x}\)</span></p>
+<p>Bewegungswert <span class="math notranslate nohighlight">\(t_{T_x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(M_{T_x}=(U_{T_x}, V_{T_x})\)</span>  wie folgt generiert werden</p>
 <div class="math notranslate nohighlight">
 \[U_{T_x}(i,j) = (i-i_{T_x})r_{T_x} + t_{T_x}\]</div>
 <div class="math notranslate nohighlight">
@@ -347,9 +340,15 @@ auf ähnliche Weise erzeugt werden.</p>
 Die Translation entlang der z-Achse verursacht normalerweise ein radiales Bewegungsunschärfemuster in Richtung des Fluchtpunkts. Indem man den semantischen Kontext ignoriert und ein
 einfaches radiales Muster annimmt, kann <span class="math notranslate nohighlight">\(M_{T_z}\)</span> durch <span class="math notranslate nohighlight">\(U_{T_z}(i,j) = t_{T_z} d(i,j)^ζ (i-i_{T_z}), V_{T_z}(i,j) = t_{T_z} d(i,j)^ζ (j-j_{T_z})\)</span> erzeugt werden, wobei
 <span class="math notranslate nohighlight">\(p_{T_z}\)</span> einen abgetasteten Fluchtpunkt bezeichnet, <span class="math notranslate nohighlight">\(d(i,j) = \|(i,j)-p_{T_z}\|_2\)</span> ist der Abstand von einem beliebigen Pixel <span class="math notranslate nohighlight">\((i,j)\)</span> zum Fluchtpunkt, ζ und <span class="math notranslate nohighlight">\(t_{T_z}\)</span> werden verwendet, um die Form des radialen Musters zu steuern, welches die Bewegungsgeschwindigkeit widerspiegelt.</p>
-<p>$<span class="math notranslate nohighlight">\(ζ , t_{T_z}\)</span>$ Form des radialen Musters zu steuern, welches die Bewegungsgeschwindigkeit widerspiegelt.</p>
-<p>$<span class="math notranslate nohighlight">\(p_{T_z}\)</span>$ einen abgetasteten Fluchtpunkt bezeichnet</p>
-<p>$<span class="math notranslate nohighlight">\(d(i,j) = \|(i,j)-p_{T_z}\|_2\)</span><span class="math notranslate nohighlight">\( ist der Abstand von einem beliebigen Pixel \)</span>(i,j)$ zum Fluchtpunkt</p>
+<div class="math notranslate nohighlight">
+\[ζ , t_{T_z}\]</div>
+<p>Form des radialen Musters zu steuern, welches die Bewegungsgeschwindigkeit widerspiegelt.</p>
+<div class="math notranslate nohighlight">
+\[p_{T_z}\]</div>
+<p>einen abgetasteten Fluchtpunkt bezeichnet</p>
+<div class="math notranslate nohighlight">
+\[d(i,j) = \|(i,j)-p_{T_z}\|_2\]</div>
+<p>ist der Abstand von einem beliebigen Pixel <span class="math notranslate nohighlight">\((i,j)\)</span> zum Fluchtpunkt</p>
 <div class="math notranslate nohighlight">
 \[U_{T_z}(i,j) = t_{T_z} d(i,j)^ζ (i-i_{T_z})\]</div>
 <div class="math notranslate nohighlight">
@@ -359,9 +358,19 @@ einfaches radiales Muster annimmt, kann <span class="math notranslate nohighligh
 Wir tasten zunächst ein Rotationszentrum <span class="math notranslate nohighlight">\(p_{R_z}\)</span> und eine Winkelgeschwindigkeit <span class="math notranslate nohighlight">\(\omega\)</span> ab, wobei <span class="math notranslate nohighlight">\(\omega&gt;0\)</span> die Drehung im Uhrzeigersinn bezeichnet. Sei <span class="math notranslate nohighlight">\(s(i,j)=2d(i,j)tan(\omega/2)\)</span>. Die Bewegungsgröße an jedem Pixel ist <span class="math notranslate nohighlight">\(s(i,j)=2d(i,j)\tan(\omega/2)\)</span>. Indem <span class="math notranslate nohighlight">\(\theta(i,j)=\text{atan}[(i-i_{R_z})/(j-j_{R_z})] \in [-\pi, \pi]\)</span>, Bewegungsvektor am Pixel <span class="math notranslate nohighlight">\((i, j)\)</span> kann als <span class="math notranslate nohighlight">\(\theta(i,j)=\text{atan}[(i-i_{R_z})/(j-j_{R_z})] \in [-\pi, \pi]\)</span> erzeugt werden;  <span class="math notranslate nohighlight">\(U_{R_z}(i,j) = s(i,j) \cos(\theta(i,j)-\pi/2), V_{R_z}(i,j) = s(i,j) \sin(\theta(i,j)-\pi/2)\)</span>.
 Wir setzen einheitliche Prioritäten über alle Parameter, die der Motion-Flow-Simulation entsprechen, als <span class="math notranslate nohighlight">\(\text{Uniform}(\alpha, \beta)\)</span>.
 Hinweis: Die vier Komponenten werden in kontinuierlicher Domäne simuliert und werden dann als ganze Zahlen diskretisiert.</p>
-<p>Rotationszentrum $<span class="math notranslate nohighlight">\(p_{R_z}\)</span>$</p>
-<p>Winkelgeschwindigkeit $<span class="math notranslate nohighlight">\(\omega\)</span><span class="math notranslate nohighlight">\( ab, wobei \)</span><span class="math notranslate nohighlight">\(\omega&gt;0\)</span>$ die Drehung im Uhrzeigersinn</p>
-<p>$<span class="math notranslate nohighlight">\(s(i,j)=2d(i,j)tan(\omega/2)\)</span>$. Die Bewegungsgröße an jedem Pixel</p>
+<p>Rotationszentrum</p>
+<div class="math notranslate nohighlight">
+\[p_{R_z}\]</div>
+<p>Winkelgeschwindigkeit</p>
+<div class="math notranslate nohighlight">
+\[\omega\]</div>
+<p>ab, wobei</p>
+<div class="math notranslate nohighlight">
+\[\omega&gt;0\]</div>
+<p>die Drehung im Uhrzeigersinn</p>
+<div class="math notranslate nohighlight">
+\[s(i,j)=2d(i,j)tan(\omega/2)\]</div>
+<p>Die Bewegungsgröße an jedem Pixel</p>
 <p>Bewegungsvektor am Pixel <span class="math notranslate nohighlight">\((i, j)\)</span></p>
 <div class="math notranslate nohighlight">
 \[\theta(i,j)=\text{atan}[(i-i_{R_z})/(j-j_{R_z})] \in [-\pi, \pi]\]</div>
@@ -432,9 +441,12 @@ Signal-Rausch-Verhältnis <span class="math notranslate nohighlight">\((PSNR)\)<
 (MSE) der Motion-Flow-Map gemessen</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(MSE\)</span>
-definiert als $<span class="math notranslate nohighlight">\(\frac{1}{2|M|} \!\sum_{i,j}((U(i; j) − \hat U (i; j))^2 + ((V(i; j) −
-\hat V (i; j))^2\)</span><span class="math notranslate nohighlight">\(, wobei \)</span>|M|<span class="math notranslate nohighlight">\( die Anzahl der Bewegungsvektoren bezeichnet
-in \)</span>M$.</p>
+definiert als</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{2|M|} \!\sum_{i,j}((U(i; j) − \hat U (i; j))^2 + ((V(i; j) −
+\hat V (i; j))^2\]</div>
+<p>, wobei <span class="math notranslate nohighlight">\(|M|\)</span> die Anzahl der Bewegungsvektoren bezeichnet
+in <span class="math notranslate nohighlight">\(M\)</span>.</p>
 <p>Zur Beurteilung der Bildqualität verwenden wir Peak
 Signal-Noise-Ratio <span class="math notranslate nohighlight">\((PSNR)\)</span> und strukturellen Ähnlichkeitsindex
 <span class="math notranslate nohighlight">\((SSIM)\)</span>.</p>

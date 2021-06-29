@@ -8,7 +8,7 @@
 
 # RGB-Bild mit der willkürlichen Größe $$P\times Q$$
 
-# $$M=(U,V)$$ mit der gleichen Größe wie das Eingabebild
+# $M=(U,V)$ mit der gleichen Größe wie das Eingabebild
 
 # $$U(i,j)\in D_u^+$$
 
@@ -56,14 +56,8 @@
 
 # Es wird dann die **Summe des Kreuzentropieverlustes von beiden Kanälen** als die **Finale Loss-Function** verwendet.
 
-# \begin{eqnarray}
-# \begin{split}
-#    L(Y,M)\! =\! &-\!\sum_{i=1}^P\sum_{j=1}^Q \! \sum_{u\in D_u^+}\! 1(U(i,j)=u) \log(F_{u,i,j}(Y)) \\
-#      & -\!\sum_{i=1}^P\sum_{j=1}^Q \!\sum_{v\in D_v} 1(V(i,j)=v) \log(F_{v,i,j}(Y)),
-# \end{split}
-#    \label{eq:loss_fun}
-#    \nonumber
-# \end{eqnarray}
+# ![FCN_MotionFlow.PNG](./loss.PNG)
+
 # $1$ ist eine Indikator Funktion
 # <br>
 
@@ -126,11 +120,11 @@
 
 # $$p_{T_x}=(i_{T_x}, j_{T_x})$$
 
-# Beschleunigungskoeffizienten $$r_{T_x}$$
+# Beschleunigungskoeffizienten $r_{T_x}$
 
-# Bewegungswert $$t_{T_x}$$ 
+# Bewegungswert $t_{T_x}$
 
-# $$M_{T_x}=(U_{T_x}, V_{T_x})$$  wie folgt generiert werden
+# $M_{T_x}=(U_{T_x}, V_{T_x})$  wie folgt generiert werden
 # 
 
 # $$U_{T_x}(i,j) = (i-i_{T_x})r_{T_x} + t_{T_x}$$
@@ -148,11 +142,17 @@
 # $p_{T_z}$ einen abgetasteten Fluchtpunkt bezeichnet, $d(i,j) = \|(i,j)-p_{T_z}\|_2$ ist der Abstand von einem beliebigen Pixel $(i,j)$ zum Fluchtpunkt, ζ und $t_{T_z}$ werden verwendet, um die Form des radialen Musters zu steuern, welches die Bewegungsgeschwindigkeit widerspiegelt.
 # 
 
-# $$ζ , t_{T_z}$$ Form des radialen Musters zu steuern, welches die Bewegungsgeschwindigkeit widerspiegelt.
+# $$ζ , t_{T_z}$$
 
-# $$p_{T_z}$$ einen abgetasteten Fluchtpunkt bezeichnet
+#  Form des radialen Musters zu steuern, welches die Bewegungsgeschwindigkeit widerspiegelt.
 
-# $$d(i,j) = \|(i,j)-p_{T_z}\|_2$$ ist der Abstand von einem beliebigen Pixel $(i,j)$ zum Fluchtpunkt
+# $$p_{T_z}$$
+
+#  einen abgetasteten Fluchtpunkt bezeichnet
+
+# $$d(i,j) = \|(i,j)-p_{T_z}\|_2$$
+
+#  ist der Abstand von einem beliebigen Pixel $(i,j)$ zum Fluchtpunkt
 
 # $$U_{T_z}(i,j) = t_{T_z} d(i,j)^ζ (i-i_{T_z})$$
 
@@ -168,11 +168,23 @@
 # Hinweis: Die vier Komponenten werden in kontinuierlicher Domäne simuliert und werden dann als ganze Zahlen diskretisiert.
 # 
 
-# Rotationszentrum $$p_{R_z}$$
+# Rotationszentrum
 
-# Winkelgeschwindigkeit $$\omega$$ ab, wobei $$\omega>0$$ die Drehung im Uhrzeigersinn
+# $$p_{R_z}$$
 
-# $$s(i,j)=2d(i,j)tan(\omega/2)$$. Die Bewegungsgröße an jedem Pixel
+# Winkelgeschwindigkeit
+
+# $$\omega$$
+
+# ab, wobei
+
+# $$\omega>0$$
+
+# die Drehung im Uhrzeigersinn
+
+# $$s(i,j)=2d(i,j)tan(\omega/2)$$
+
+# Die Bewegungsgröße an jedem Pixel
 
 # Bewegungsvektor am Pixel $(i, j)$
 
@@ -243,8 +255,12 @@
 # (MSE) der Motion-Flow-Map gemessen
 
 # $MSE$
-# definiert als $$\frac{1}{2|M|} \!\sum_{i,j}((U(i; j) − \hat U (i; j))^2 + ((V(i; j) −
-# \hat V (i; j))^2$$, wobei $|M|$ die Anzahl der Bewegungsvektoren bezeichnet
+# definiert als 
+
+# $$\frac{1}{2|M|} \!\sum_{i,j}((U(i; j) − \hat U (i; j))^2 + ((V(i; j) −
+# \hat V (i; j))^2$$
+
+# , wobei $|M|$ die Anzahl der Bewegungsvektoren bezeichnet
 # in $M$.
 
 # Zur Beurteilung der Bildqualität verwenden wir Peak
