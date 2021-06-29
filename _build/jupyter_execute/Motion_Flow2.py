@@ -6,7 +6,7 @@
 # <br>**Motion-Flow Schätzung und Netzwerk-Design**<br><br>
 # Das Ziel dieses FCN-Netzwerks besteht darin, eine **End-to-End-Mapping** von einem unscharfen Bild auf dessen entsprechende Motion Flow Map zu erreichen. Gegeben sei ein beliebiges RGB-Bild mit der willkürlichen Größe $P\times Q$. Das FCN wird dazu verwendet eine Motion Flow-Map zu schätzen $M=(U,V)$ mit der gleichen Größe wie das Eingabebild, wobei $U(i,j)\in D_u^+$ and $V(i,j)\in D_v$, $\forall i,j$. 
 
-# RGB-Bild mit der willkürlichen Größe $$P\times Q$$
+# RGB-Bild mit der willkürlichen Größe $P\times Q$
 
 # $M=(U,V)$ mit der gleichen Größe wie das Eingabebild
 
@@ -125,7 +125,6 @@
 # Bewegungswert $t_{T_x}$
 
 # $M_{T_x}=(U_{T_x}, V_{T_x})$  wie folgt generiert werden
-# 
 
 # $$U_{T_x}(i,j) = (i-i_{T_x})r_{T_x} + t_{T_x}$$
 
