@@ -229,6 +229,11 @@
    Deconvolution
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-archtitecture">
+   model archtitecture
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -397,6 +402,446 @@
 </div>
 </div>
 <p><img alt="example1_result" src="_images/example1_result.png" /></p>
+</div>
+<div class="section" id="model-archtitecture">
+<h2>model archtitecture<a class="headerlink" href="#model-archtitecture" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;data&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Input&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;data&quot;</span>
+  <span class="n">input_param</span> <span class="p">{</span>
+    <span class="n">shape</span> <span class="p">{</span>
+      <span class="n">dim</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="n">dim</span><span class="p">:</span> <span class="mi">3</span>
+      <span class="n">dim</span><span class="p">:</span> <span class="mi">500</span>
+      <span class="n">dim</span><span class="p">:</span> <span class="mi">500</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;conv1&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;data&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv1&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">96</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">30</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">7</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">weight_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span>
+      <span class="n">std</span><span class="p">:</span> <span class="mf">0.01</span>
+    <span class="p">}</span>
+    <span class="n">bias_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;relu1&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;ReLU&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv1&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv1&quot;</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;pool1&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Pooling&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv1&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;pool1&quot;</span>
+  <span class="n">pooling_param</span> <span class="p">{</span>
+    <span class="n">pool</span><span class="p">:</span> <span class="n">MAX</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;conv2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;pool1&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv2&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">256</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">5</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">weight_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span>
+      <span class="n">std</span><span class="p">:</span> <span class="mf">0.01</span>
+    <span class="p">}</span>
+    <span class="n">bias_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;relu2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;ReLU&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv2&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv2&quot;</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;pool2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Pooling&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv2&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;pool2&quot;</span>
+  <span class="n">pooling_param</span> <span class="p">{</span>
+    <span class="n">pool</span><span class="p">:</span> <span class="n">MAX</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;conv3&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;pool2&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv3&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">512</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">weight_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span>
+      <span class="n">std</span><span class="p">:</span> <span class="mf">0.01</span>
+    <span class="p">}</span>
+    <span class="n">bias_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;relu3&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;ReLU&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv3&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv3&quot;</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;pool3&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Pooling&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv3&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;pool3&quot;</span>
+  <span class="n">pooling_param</span> <span class="p">{</span>
+    <span class="n">pool</span><span class="p">:</span> <span class="n">MAX</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;conv4&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;pool3&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv4&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">512</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">weight_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span>
+      <span class="n">std</span><span class="p">:</span> <span class="mf">0.01</span>
+    <span class="p">}</span>
+    <span class="n">bias_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;relu4&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;ReLU&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv4&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv4&quot;</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;pool4&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Pooling&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv4&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;pool4&quot;</span>
+  <span class="n">pooling_param</span> <span class="p">{</span>
+    <span class="n">pool</span><span class="p">:</span> <span class="n">MAX</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;conv5&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;pool4&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv5&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">1024</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">weight_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span>
+      <span class="n">std</span><span class="p">:</span> <span class="mf">0.01</span>
+    <span class="p">}</span>
+    <span class="n">bias_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;relu5&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;ReLU&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv5&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;conv5&quot;</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;score_fr&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;conv5&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score_fr&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">112</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">weight_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span>
+      <span class="n">std</span><span class="p">:</span> <span class="mf">0.01</span>
+    <span class="p">}</span>
+    <span class="n">bias_filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;upscore2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Deconvolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;score_fr&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;upscore2&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">112</span>
+    <span class="n">bias_term</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;scale_pool3&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Scale&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;pool3&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;scale_pool3&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">scale_param</span> <span class="p">{</span>
+    <span class="n">filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mf">0.01</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;score_pool3&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;scale_pool3&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score_pool3&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">112</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;score_pool3c&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Crop&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;score_pool3&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;upscore2&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score_pool3c&quot;</span>
+  <span class="n">crop_param</span> <span class="p">{</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">offset</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;fuse_pool3&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Eltwise&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;upscore2&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;score_pool3c&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;fuse_pool3&quot;</span>
+  <span class="n">eltwise_param</span> <span class="p">{</span>
+    <span class="n">operation</span><span class="p">:</span> <span class="n">SUM</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;upscore_pool3&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Deconvolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;fuse_pool3&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;upscore_pool3&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">112</span>
+    <span class="n">bias_term</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;scale_pool2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Scale&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;pool2&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;scale_pool2&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">scale_param</span> <span class="p">{</span>
+    <span class="n">filler</span> <span class="p">{</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span>
+      <span class="n">value</span><span class="p">:</span> <span class="mf">0.0001</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;score_pool2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Convolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;scale_pool2&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score_pool2&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">decay_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">112</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;score_pool2c&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Crop&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;score_pool2&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;upscore_pool3&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score_pool2c&quot;</span>
+  <span class="n">crop_param</span> <span class="p">{</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">offset</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;fuse_pool2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Eltwise&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;upscore_pool3&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;score_pool2c&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;fuse_pool2&quot;</span>
+  <span class="n">eltwise_param</span> <span class="p">{</span>
+    <span class="n">operation</span><span class="p">:</span> <span class="n">SUM</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;upscore_pool2&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Deconvolution&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;fuse_pool2&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;upscore_pool2&quot;</span>
+  <span class="n">param</span> <span class="p">{</span>
+    <span class="n">lr_mult</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+  <span class="n">convolution_param</span> <span class="p">{</span>
+    <span class="n">num_output</span><span class="p">:</span> <span class="mi">112</span>
+    <span class="n">bias_term</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="mi">8</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;score&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Crop&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;upscore_pool2&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;data&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score&quot;</span>
+  <span class="n">crop_param</span> <span class="p">{</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">offset</span><span class="p">:</span> <span class="mi">9</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">layer</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;score1&quot;</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Slice&quot;</span>
+  <span class="n">bottom</span><span class="p">:</span> <span class="s2">&quot;score&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score1&quot;</span>
+  <span class="n">top</span><span class="p">:</span> <span class="s2">&quot;score2&quot;</span>
+  <span class="n">slice_param</span> <span class="p">{</span>
+    <span class="n">slice_point</span><span class="p">:</span> <span class="mi">39</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
