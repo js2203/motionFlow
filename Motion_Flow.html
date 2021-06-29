@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; From Motion Blur to Motion Flow</title>
+    <title>Umsetzung &#8212; From Motion Blur to Motion Flow</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,8 +53,6 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Code" href="Code.html" />
-    <link rel="prev" title="Estimating Motion Flow for Blur Removal" href="Model.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -100,6 +98,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="Model.html">
    Estimating Motion Flow for Blur Removal
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Motion_Flow2.html">
+   Umsetzung
   </a>
  </li>
  <li class="toctree-l1">
@@ -211,14 +214,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -227,7 +222,9 @@
         
               <div>
                 
-  <p><br><strong>Motion-Flow Schätzung und Netzwerk-Design</strong><br><br>
+  <div class="section" id="umsetzung">
+<h1>Umsetzung<a class="headerlink" href="#umsetzung" title="Permalink to this headline">¶</a></h1>
+<p><br><strong>Motion-Flow Schätzung und Netzwerk-Design</strong><br><br>
 Das Ziel dieses FCN-Netzwerks besteht darin, eine <strong>End-to-End-Mapping</strong> von einem unscharfen Bild auf dessen entsprechende Motion Flow Map zu erreichen. Gegeben sei ein beliebiges RGB-Bild mit der willkürlichen Größe <span class="math notranslate nohighlight">\(P\times Q\)</span>. Das FCN wird dazu verwendet eine Motion Flow-Map zu schätzen <span class="math notranslate nohighlight">\(M=(U,V)\)</span> mit der gleichen Größe wie das Eingabebild, wobei <span class="math notranslate nohighlight">\(U(i,j)\in D_u^+\)</span> and <span class="math notranslate nohighlight">\(V(i,j)\in D_v\)</span>, <span class="math notranslate nohighlight">\(\forall i,j\)</span>.</p>
 <p>RGB-Bild mit der willkürlichen Größe $<span class="math notranslate nohighlight">\(P\times Q\)</span>$</p>
 <p>$<span class="math notranslate nohighlight">\(M=(U,V)\)</span>$ mit der gleichen Größe wie das Eingabebild</p>
@@ -636,6 +633,7 @@ Methode verwendet ein FCN, um eine dichte Motion-Flow-Karte zum Entfernen von Un
 . Außerdem generieren wir automatisch
 Trainingsdaten mit simulierten Motion-Flow-Maps für das Training
 des FCN. Experimentelle Ergebnisse sowohl von synthetischen als auch realen Daten zeigen die Exzellenz der vorgeschlagenen Methode.</p>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -662,8 +660,6 @@ des FCN. Experimentelle Ergebnisse sowohl von synthetischen als auch realen Date
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Model.html" title="previous page">Estimating Motion Flow for Blur Removal</a>
-    <a class='right-next' id="next-link" href="Code.html" title="next page">Code</a>
 
         </div>
         
