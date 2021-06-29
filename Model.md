@@ -60,7 +60,7 @@ Quelle: {cite:p}`gong2017blur2mf`
 Der blur kernel erscheint auf jedem Pixel als Linienspur mit nonzero Komponenten nur entlang der Bewegungsspur.
 
 
-![Deblurring](./images/MotionFlowFormula.PNG)
+![Deblurring](./images/MotionFlowFormula.PNG) 
 
 
 Damit ist es möglich, eine heterogene motion blur estimation zu erreichen, indem die motion vectors auf allen Pixeln berechnet werden. Das Ergebnis aus allen motion Vektoren wird als motion flow $M$ bezeichnet.
