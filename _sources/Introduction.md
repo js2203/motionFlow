@@ -17,7 +17,7 @@ Bewegungsunschärfe in realen Bildern hat eine Vielzahl von Ursachen, darunter K
 Zusätzlich zu den Annahmen über über die Ursache der Unschärfe beruhen die meisten existierenden Deblurring-Methoden auch auf vordefinierte priors oder manuell designte image features angewiesen.
 
 
-In diesem Paper gibt werden drei Hauptprobleme mit bestehenden Ansätzen aufgezeigt: 
+In diesem Paper wurden drei Hauptprobleme mit bestehenden Ansätzen aufgezeigt: 
 1) Der Bereich der anwendbaren Bewegungstypen ist begrenzt,  
 2) manuell definierte Priore und Bildmerkmale können nicht die Natur der Daten widerspiegeln und  
 3) eine komplizierte und zeitaufwändige Optimierung und/oder Nachbearbeitung erforderlich ist.  
