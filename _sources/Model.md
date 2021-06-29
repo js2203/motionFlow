@@ -57,8 +57,13 @@ Ist $u_p$ und $v_p$ dabei jeweils Teil einer eigenen Domäne, dann ist $M_p \in 
 Quelle: {cite:p}`gong2017blur2mf`
 
 
-![motionFlowFormula](./images/motionFlowFormula.PNG)  
-Quelle: {cite:p}`gong2017blur2mf`
+Der blur kernel erscheint erscheint auf jedem Pixel als Linienspur mit nonzero Komponenten nur entlang der Bewegungsspur.
+
+
+![motionFlowFormula](./images/motionFlowFormula.PNG)
+
+
+Damit ist es möglich, eine heterogene motion blur estimation zu erreichen, indem die motion vectors auf allen Pixeln berechnet werden. Das Ergebnis aus allen motion Vektoren wird als motion flow $M$ bezeichnet.
 
 
 ### Deconvolution
@@ -69,6 +74,9 @@ Quelle: {cite:p}`gong2017blur2mf`
 
 
 Das unscharfe Bild kann mithilfe des berechneten Motion Flow wieder zu einem scharfen Bild wiederhergestellt werden. Für die Wiederherstellung wird dabei das non-blind deconvolution Verfahren verwendet. Dafür wird ein Gaussian mixture model based regularizer $\Omega(x)$
+
+
+![deblurringFormula](./images/deblurringFormula.PNG)
 
 
 ## Learning for Motion Flow Estimation
