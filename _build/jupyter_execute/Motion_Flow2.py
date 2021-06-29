@@ -100,10 +100,7 @@
 # Der simuliere Motion Flow wird direkt auf ein 2D-Bild projiziert, anstatt
 # auf die 3D-Bewegungsbahn.
 
-# \begin{equation}
-#    M = M_{T_x}+M_{T_y}+M_{T_z}+M_{R_z},
-#    \label{eq:mf_decomp}
-# \end{equation}
+# $$ M = M_{T_x} + M_{T_y} + M_{T_z} + M_{R_z}$$
 
 # wobei $M_{T_x}$, $M_{T_y}$ und $M_{T_z}$ die Motion Flows bezeichnet, die mit den Translationen entlang der $x$-, $y$- und $z$-Achse zusammenhängen.
 # $M_{R_z}$ repräsentiert die Bewegung aus der Rotation um die z
