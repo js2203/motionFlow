@@ -57,10 +57,7 @@ Ist $u_p$ und $v_p$ dabei jeweils Teil einer eigenen Domäne, dann ist $M_p \in 
 Quelle: {cite:p}`gong2017blur2mf`
 
 
-Der blur kernel erscheint erscheint auf jedem Pixel als Linienspur mit nonzero Komponenten nur entlang der Bewegungsspur.
-
-
-![motionFlowFormula](./images/motionFlowFormula.PNG)
+Der blur kernel erscheint auf jedem Pixel als Linienspur mit nonzero Komponenten nur entlang der Bewegungsspur.
 
 
 Damit ist es möglich, eine heterogene motion blur estimation zu erreichen, indem die motion vectors auf allen Pixeln berechnet werden. Das Ergebnis aus allen motion Vektoren wird als motion flow $M$ bezeichnet.
