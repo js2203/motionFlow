@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Umsetzung 
+
 # <br>**Motion-Flow Schätzung und Netzwerk-Design**<br><br>
 # Das Ziel dieses FCN-Netzwerks besteht darin, eine **End-to-End-Mapping** von einem unscharfen Bild auf dessen entsprechende Motion Flow Map zu erreichen. Gegeben sei ein beliebiges RGB-Bild mit der willkürlichen Größe $P\times Q$. Das FCN wird dazu verwendet eine Motion Flow-Map zu schätzen $M=(U,V)$ mit der gleichen Größe wie das Eingabebild, wobei $U(i,j)\in D_u^+$ and $V(i,j)\in D_v$, $\forall i,j$. 
 
