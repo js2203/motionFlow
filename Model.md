@@ -17,7 +17,7 @@ $$Y = K ∗ X + N$$
 $$Y(i, j) = \sum\limits_{i´, j´} K_{(i, j)} (i´, j´) X (i + i´, j +j´)$$
 
 
-* $K_{(i, j)}$ repräsentiert den Kernel aus K, der auf den Pixel (i, j) zentriert ist
+* $K_{(i, j)}$ repräsentiert den Kernel aus K, der auf den Pixel $(i, j)$ zentriert ist, der auf einem Bereich des Bildes wirkt.
 
 
 $$y = H(K)x + n;$$
@@ -108,10 +108,13 @@ Quelle: {cite:p}`7410638`
 
 
 Für die Bewegeungsvektoren $U$ und $V$ werden dafür eine integer domain festgelegt und $M =f(Y)$ als multi-class classification.  
-Dadurch erhält man die 2 Domänen  
+Dadurch erhält man die 2 Domänen, wobei $\mathbb{Z}$ die integer domain ist.  
+
+
 $$\mathbb{D}_u = \{u|u ∈ \mathbb{Z}, |u| \leq u_{max}\}$$  
+
+
 $$\mathbb{D}_v = \{v|v ∈ \mathbb{Z}, |u| \leq v_{max}\}$$  
-wobei $\mathbb{Z}$ die integer domain ist.
 
 
 ![vectorDomain](./images/vectorDomain.PNG)

@@ -233,8 +233,8 @@
 In diesen Theorien wurden bereits mehrere Ansätze genauer betrachtet, um die Bewegungsunschärfe zu entfernen. Dazu gehören unter anderem:</p>
 <ul class="simple">
 <li><p>total variational regularizer mit der Maximum-a-posteriori-Methode (MAP). Das Verfahren schätzt einen unbekannten Parameter durch den Modalwert der A-posteriori-Verteilung.</p></li>
-<li><p>Gaussian scale mixture priors, es wird angenommen, dass das Rauschen/ Blur gaußförmig ist.</p></li>
-<li><p>Analyse der Interaktion zwischen Bildregularisierern und den Auswirkungen von Unschärfe auf die hohen Frequenzen in einem Bild. Die Einführung eines neuartigen Regularisierers der die Abschwächung der hohen Frequenzen kompensiert und damit den Kernel-Schätzprozess stark stabilisiert (<span class="math notranslate nohighlight">\(l_1/ l_2\)</span>-Norm &amp; <span class="math notranslate nohighlight">\(l_0 Norm\)</span>)</p></li>
+<li><p>Gaussian scale mixture priors, dabei wird angenommen, dass das Rauschen/ Blur gaußförmig ist.</p></li>
+<li><p>Analyse der Interaktion zwischen Bildregularisierern und den Auswirkungen von Unschärfe auf die hohen Frequenzen in einem Bild. Dafür wurden neue Regularisierers eingeführt, der die Abschwächung der hohen Frequenzen kompensiert und damit den Kernel-Estimation stark stabilisiert (<span class="math notranslate nohighlight">\(l_1/ l_2\)</span>-Norm &amp; <span class="math notranslate nohighlight">\(l_0 Norm\)</span>).</p></li>
 </ul>
 <p><img alt="l0_norm" src="_images/l0_norm.PNG" /><br />
 Quelle: <span id="id1">[<a class="reference internal" href="Bibliographie.html#id5">XZJ13</a>]</span></p>
@@ -264,23 +264,27 @@ Quelle: <span id="id3">[<a class="reference internal" href="Bibliographie.html#i
 <p><img alt="motionPath" src="_images/motionPath.PNG" /><br />
 Quelle: <span id="id4">[<a class="reference internal" href="Bibliographie.html#id8">TB11</a>]</span></p>
 <ul class="simple">
-<li><p>Ein weiterer Ansatz ist, die Kamerabewegugn als motion density function für non-uniform blur zu modellieren, die den Anteil der Zeit aufzeichnet, der in jedem diskretisierten Teil des Raums aller möglichen Kamerapositionen verbracht wird.</p></li>
+<li><p>Ein weiterer Ansatz ist, die Kamerabewegung als motion density function für non-uniform blur zu modellieren, die den Anteil der Zeit aufzeichnet, der in jedem diskretisierten Teil des Raums aller möglichen Kamerapositionen verbracht wird.</p></li>
+</ul>
+<p><img alt="motionDensity" src="_images/motionDensity.PNG" /><br />
+Quelle: <span id="id5">[<a class="reference internal" href="Bibliographie.html#id9">GJZ+10</a>]</span></p>
+<ul class="simple">
 <li><p>Um die Unschärfe, die durch die Bewegung von Objekten verursacht wird, zu behandeln, segmentieren einige Methoden Bilder in Bereiche mit unterschiedlichen Arten von Unschärfe und sind somit stark von einer akkuraten Segmentierung eines unscharfen Bildes abhängig.</p></li>
-<li><p>Ein pixelweises lineares Bewegungsmodell, um mit heterogener Bewegungsunschärfe umzugehen. Obwohl die Bewegung als lokal linear angenommen wird, gibt es keine Annahmen über die latente Bewegung, was es flexibel genug macht, um einen großen Bereich möglicher Bewegungen zu behandeln.</p></li>
+<li><p>Ein pixelweises lineares Bewegungsmodell, um mit heterogener Bewegungsunschärfe umzugehen. Obwohl die Bewegung als lokal linear angenommen wird, gibt es keine Annahmen über die latente Bewegung, was es flexibel genug macht, um einen großen Bereich möglicher Bewegungen zu behandeln. Das Problem is hierbei, dass bei Kenntnis der spezifischen Arten von Bewegungsunschärfen  herkömmliche Entschärfungsmethoden, die die globale Kamerabewegung schätzen, bessere Ergebnisse in weniger texturierten Regionen liefern.</p></li>
 </ul>
 </div>
 <div class="section" id="learning-based-motion-blur-removing">
 <h2>Learning based motion blur removing<a class="headerlink" href="#learning-based-motion-blur-removing" title="Permalink to this headline">¶</a></h2>
-<p>In den neusten Papern werden lernbasierte Methoden verwendet, um eine flexiblere und effizientere Unschärfeentfernung zu erreichen.<br />
-Es wurden einige diskriminative Methoden für die nicht-blinde Dekonvolution vorgeschlagen, die auf</p>
+<p>In den neusten Papern werden lernbasierte Methoden verwendet, um eine flexiblere und effizienteres Entfernen von Bewegungsunschärfe zu erreichen.</p>
+<p>Es wurden einige diskriminative Methoden für die nicht-blinde Dekonvolution vorgeschlagen, die auf</p>
 <ul class="simple">
 <li><p>Gaussian conditional random fields</p></li>
 <li><p>Multi-Layer-Perceptron (MLP)</p></li>
 <li><p>Deep Convolution Neural Network (CNN)</p></li>
 </ul>
 <p>basieren, die alle die bekannten blur-kernel benötigen.
-Einige End-to-End-Methoden wurden vorgeschlagen, um unscharfe Bilder zu rekonstruieren, allerdings können sie nur mit leichter Gaußscher Unschärfe umgehen.<br />
-Die relevanteste Arbeit ist eine Methode, die auf CNN und der Klassifizierung des Unschärfetyps auf Patch-Ebene basiert, die sich ebenfalls auf die Schätzung des Bewegungsflusses aus einem einzelnen unscharfen Bild konzentriert. Dabei wird das CNN auf kleinen Patch-Beispielen mit gleichmäßiger Bewegungsunschärfe trainiert, wobei jedem Patch ein einzelnes Bewegungslabel zugewiesen wird, was die Natur der realen Daten verletzt und die Korrespondenz in größeren Bereichen ignoriert. Für den endgültigen dichten Bewegungsfluss sind viele Nachbearbeitungen wie Markov random field (MRF) erforderlich.</p>
+Einige End-to-End-Methoden wurden vorgeschlagen, um unscharfe Bilder zu rekonstruieren, allerdings können sie nur mit leichter Gaußscher Unschärfe umgehen.</p>
+<p>Die relevanteste Arbeit ist eine Methode, die auf einem CNN und der Klassifizierung des blur-types auf Patch-Ebene basiert, die sich ebenfalls auf die Schätzung des motion flow aus einem einzelnen unscharfen Bild konzentriert.  Dabei wird das CNN auf kleinen Patch-Beispielen mit gleichmäßiger Bewegungsunschärfe trainiert, wobei jedem Patch ein einzelnes Bewegungslabel zugewiesen wird. Für den endgültigen dense motion flow sind viele Nachbearbeitungen wie Markov random field (MRF) erforderlich.</p>
 </div>
 </div>
 
