@@ -18,7 +18,7 @@ Zusätzlich zu den Annahmen über über die Ursache der Unschärfe beruhen die m
 
 
 In diesem Paper wurden drei Hauptprobleme mit bestehenden Ansätzen aufgezeigt: 
-1) Der Bereich der anwendbaren Bewegungstypen ist begrenzt,  
+1) Die Anzahl der möglichen Bewegungstypen ist begrenzt,  
 2) manuell definierte Priore und Bildmerkmale können nicht die Natur der Daten widerspiegeln und  
 3) eine komplizierte und zeitaufwändige Optimierung und/oder Nachbearbeitung erforderlich ist.  
 

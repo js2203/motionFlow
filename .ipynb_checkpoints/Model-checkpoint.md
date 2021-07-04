@@ -4,6 +4,9 @@
 ## Heterogeneous Motion Blur Model
 
 
+Das allgemeiner Model für ein unscharfes Bild wird wie folgt beschrieben:
+
+
 $$Y = K ∗ X + N$$
 
 
@@ -14,10 +17,16 @@ $$Y = K ∗ X + N$$
 * N = zusätzliches Bildrauschen
 
 
+Dabei kann der blur kernel, welcher auf das scharfe Bild angewendet wird, wie folgt beschrieben werden:
+
+
 $$Y(i, j) = \sum\limits_{i´, j´} K_{(i, j)} (i´, j´) X (i + i´, j +j´)$$
 
 
 * $K_{(i, j)}$ repräsentiert den Kernel aus K, der auf den Pixel $(i, j)$ zentriert ist, der auf einem Bereich des Bildes wirkt.
+
+
+Im Allgemeinen kann das Model ebenfalls mit vectorisierten Komponenten beschrieben werden:
 
 
 $$y = H(K)x + n;$$
@@ -50,14 +59,17 @@ Dabei besitzt ein Pixel $P = (i, j)$ einen 2 dimensionalen Bewegungsvektor $M_p 
 Quelle: {cite:p}`gong2017blur2mf`
 
 
-Ist $u_p$ und $v_p$ dabei jeweils Teil einer eigenen Domäne, dann ist $M_p \in \mathbb{D}_u \times \mathbb{D}_v$
+
+Ist $u_p$ und $v_p$ dabei jeweils Teil einer respektiven, eigenen Domäne $\mathbb{D}_u$ und $\mathbb{D}_v$.  
+Daraus lässt sich folgern, dass $M_p \in \mathbb{D}_u \times \mathbb{D}_v$ ist.
 
 
 ![Deblurring](./images/motionblurandflow.PNG)  
 Quelle: {cite:p}`gong2017blur2mf`
 
 
-Der blur kernel erscheint auf jedem Pixel als Linienspur mit nonzero Komponenten nur entlang der Bewegungsspur.
+Der blur kernel erscheint auf jedem Pixel als Linienspur mit nonzero Komponenten nur entlang der Bewegungsspur.  
+Daraus lässt sich aus der bereits beschrieben Formel für den kernel eine neue Formel wie folgt ableiten:
 
 
 ![Deblurring](./images/123.PNG) 

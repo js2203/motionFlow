@@ -14,7 +14,7 @@ In diesen Theorien wurden bereits mehrere Ansätze genauer betrachtet, um die Be
 Quelle: {cite:p}`l0norm`
 
 
-* Deblurring basierend auf dark channel based regularizers. Der Dark channel wird hauptsächlich zur Beschreibung der Minimalwerte in einem Bildausschnitt verwendet.
+* Deblurring basierend auf dark channel based regularizers. Der Dark channel wird hauptsächlich zur Beschreibung der Minimalwerte aus allen Channeln in einem Bildausschnitt verwendet.
 
 
 ![darkchannel](./images/darkchannel.PNG)  
@@ -40,7 +40,7 @@ Die Theorien, welche sich dieser Methoden annehmen, sind dabei aber sehr stark a
 
 
 Um mit räumlich variierender Unschärfe umzugehen, werden flexiblere blur Modelle vorgeschlagen.  
-* Ein Ansatz ist ein projektives projective motion path model,  die das unscharfe Bild als eine Integration einer klaren Szene unter einer Sequenz von projektiven Transformationen behandelt, die den Weg der Kamera beschreiben. 
+* Ein Ansatz ist ein projective motion path model,  die das unscharfe Bild als eine Integration einer klaren Szene unter einer Sequenz von projektiven Transformationen behandelt, die den Weg der Kamera beschreiben. 
 
 
 ![motionPath](./images/motionPath.PNG)  
